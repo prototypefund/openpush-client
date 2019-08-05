@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Patterns;
+import android.webkit.URLUtil;
 
 import eu.bubu1.logintest.data.LoginRepository;
 import eu.bubu1.logintest.data.Result;
@@ -36,30 +37,30 @@ public class LoginViewModel extends ViewModel {
             RegisteredClient data = ((Result.Success<RegisteredClient>) result).getData();
             loginResult.postValue(new LoginResult(new LoggedInUserView(data.getUserId(), data.getServerUri(), data.getClientToken())));
         } else {
-            loginResult.postValue(new LoginResult(R.string.login_failed));
+            loginResult.postValue(new LoginResult(result.toString()));
         }
     }
 
-    public void loginDataChanged(String username, String password) {
-        if (!isUserNameValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
+    void loginDataChanged(String uri, String username, String password) {
+        if (!isUriValid(uri)) {
+            loginFormState.setValue(new LoginFormState(R.string.need_http_https, null, null));
+        } else if (!isUserNameValid(username)) {
+            loginFormState.setValue(new LoginFormState(null, R.string.invalid_username, null));
         } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
+            loginFormState.setValue(new LoginFormState(null, null, R.string.invalid_password));
         } else {
             loginFormState.setValue(new LoginFormState(true));
         }
     }
 
+    private boolean isUriValid(String uri) {
+        return URLUtil.isHttpsUrl(uri)||URLUtil.isHttpUrl(uri);
+    }
+
+
     // A placeholder username validation check
     private boolean isUserNameValid(String username) {
-        if (username == null) {
-            return false;
-        }
-        if (username.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
-        } else {
-            return !username.trim().isEmpty();
-        }
+        return !username.isEmpty();
     }
 
     // A placeholder password validation check

@@ -1,9 +1,11 @@
 package eu.bubu1.logintest;
 
+import java.io.IOException;
+
 import eu.bubu1.logintest.api.ClientApi;
 import eu.bubu1.logintest.apimodels.Client;
 import eu.bubu1.logintest.apimodels.ClientRegistration;
-import io.reactivex.Observable;
+import retrofit2.Response;
 
 public class RegisterNewDeviceService {
     private ApiClient defaultClient;
@@ -13,11 +15,11 @@ public class RegisterNewDeviceService {
         defaultClient.setCredentials(username, password);
     }
 
-    public Observable<Client> registerNewDevice(String name){
+    public Response<Client> registerNewDevice(String name) throws IOException {
         ClientApi api = defaultClient.createService(ClientApi.class);
         ClientRegistration client = new ClientRegistration();
         client.name(name);
-        return api.clientPost(client);
+        return api.clientPost(client).execute();
     }
 
 }

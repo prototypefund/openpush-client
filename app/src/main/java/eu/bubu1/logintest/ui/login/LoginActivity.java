@@ -20,8 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import eu.bubu1.logintest.R;
-import eu.bubu1.logintest.ui.login.LoginViewModel;
-import eu.bubu1.logintest.ui.login.LoginViewModelFactory;
 import eu.bubu1.logintest.utils.SaveSharedPreference;
 
 public class LoginActivity extends AppCompatActivity {
@@ -41,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
+        servernameEditText.setText(SaveSharedPreference.getLoggedInServerUri(this));
+        usernameEditText.setText(SaveSharedPreference.getLoggedInUsername(this));
+
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -48,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 loginButton.setEnabled(loginFormState.isDataValid());
+                if (loginFormState.getUriError() != null) {
+                    servernameEditText.setError(getString(loginFormState.getUriError()));
+                }
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
                 }
@@ -91,10 +95,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
+                loginViewModel.loginDataChanged(
+                        servernameEditText.getText().toString(),
+                        usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         };
+        servernameEditText.addTextChangedListener(afterTextChangedListener);
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -132,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
+    private void showLoginFailed(@StringRes String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }

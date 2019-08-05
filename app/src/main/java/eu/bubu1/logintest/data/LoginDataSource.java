@@ -1,10 +1,12 @@
 package eu.bubu1.logintest.data;
 
+import android.os.Build;
 import android.webkit.URLUtil;
 
 import eu.bubu1.logintest.RegisterNewDeviceService;
 import eu.bubu1.logintest.data.model.RegisteredClient;
 import eu.bubu1.logintest.apimodels.Client;
+import retrofit2.Response;
 
 import java.io.IOException;
 
@@ -14,21 +16,27 @@ import java.io.IOException;
 public class LoginDataSource {
 
     public Result<RegisteredClient> login(String serverUri, String username, String password) {
-        //try {
-            //if (!URLUtil.isValidUrl(serverUri)) {
-            //    throw new IOException("Invalid URL");
-            //}
-                Client newClient = new RegisterNewDeviceService(serverUri, username, password)
-                        .registerNewDevice(android.os.Build.MODEL).blockingFirst();
-                RegisteredClient loggedinUser =
-                        new RegisteredClient(username, newClient.getToken());
-                return new Result.Success<>(loggedinUser);
-            //} catch (Exception e) {
-            //    return new Result.Error(new IOException("Error logging in", e));
-            //}
-    }
+        try {
+                Response<Client> clientResponse = new RegisterNewDeviceService(serverUri, username, password)
+                        .registerNewDevice(Build.MODEL);
+                if (clientResponse.isSuccessful()){
+                    RegisteredClient client = new RegisteredClient(username, serverUri, clientResponse.body().getToken());
+                    return new Result.Success<>(client);
+                }
+                else {
+                    switch (clientResponse.code()) {
+                        case 401:
+                            return new Result.Error(new IOException("Authorization failed."));
+                        case 500:
+                            return new Result.Error(new IOException("Internal Server Error."));
+                        default:
+                            return new Result.Error(new IOException("Something unexpected went wrong, Error code: " + clientResponse.code()));
+                    }
+                }
 
-    public void logout() {
-        // TODO: revoke authentication
+
+            } catch (IOException e) {
+                return new Result.Error(new IOException("Network Error", e));
+            }
     }
 }

@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import static eu.bubu1.logintest.utils.PreferencesUtility.*;
 
 public class SaveSharedPreference {
-    static SharedPreferences getPreferences(Context context) {
+    private static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -23,6 +23,13 @@ public class SaveSharedPreference {
         editor.putString(USERNAME_PREF, username);
         editor.putString(SERVER_URI_PREF, serverUri);
         editor.putString(CLIENT_TOKEN_SECRET_PREF, clientToken);
+        editor.apply();
+    }
+
+    public static void setLoggedOut(Context context){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(LOGGED_IN_PREF, false);
+        editor.remove(CLIENT_TOKEN_SECRET_PREF);
         editor.apply();
     }
 

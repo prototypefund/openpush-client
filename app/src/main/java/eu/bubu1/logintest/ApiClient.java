@@ -18,9 +18,9 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
@@ -86,7 +86,7 @@ public class ApiClient {
     this.setCredentials(username,  password);
   }
 
-  public void createDefaultAdapter(String uri) {
+  private void createDefaultAdapter(String uri) {
     json = new JSON();
     okBuilder = new OkHttpClient.Builder();
 
@@ -97,15 +97,17 @@ public class ApiClient {
     adapterBuilder = new Retrofit
       .Builder()
       .baseUrl(baseUrl)
-
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
       .addConverterFactory(ScalarsConverterFactory.create())
       .addConverterFactory(GsonCustomConverterFactory.create(json.getGson()));
   }
 
-  public <S> S createService(Class<S> serviceClass) {
+  <S> S createService(Class<S> serviceClass) {
+    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+    OkHttpClient client = okBuilder.addInterceptor(interceptor).build();
+    //OkHttpClient client = okBuilder.build();
     return adapterBuilder
-      .client(okBuilder.build())
+      .client(client)
       .build()
       .create(serviceClass);
   }
@@ -136,7 +138,7 @@ public class ApiClient {
    * @param apiKey API key
    * @return ApiClient
    */
-  public ApiClient setApiKey(String apiKey) {
+  ApiClient setApiKey(String apiKey) {
     for(Interceptor apiAuthorization : apiAuthorizations.values()) {
       if (apiAuthorization instanceof ApiKeyAuth) {
         ApiKeyAuth keyAuth = (ApiKeyAuth) apiAuthorization;
@@ -153,7 +155,7 @@ public class ApiClient {
    * @param password Password
    * @return ApiClient
    */
-  public ApiClient setCredentials(String username, String password) {
+  ApiClient setCredentials(String username, String password) {
     for(Interceptor apiAuthorization : apiAuthorizations.values()) {
       if (apiAuthorization instanceof HttpBasicAuth) {
         HttpBasicAuth basicAuth = (HttpBasicAuth) apiAuthorization;
@@ -170,7 +172,7 @@ public class ApiClient {
    * @param authorization Authorization interceptor
    * @return ApiClient
    */
-  public ApiClient addAuthorization(String authName, Interceptor authorization) {
+  private ApiClient addAuthorization(String authName, Interceptor authorization) {
     if (apiAuthorizations.containsKey(authName)) {
       throw new RuntimeException("auth name \"" + authName + "\" already in api authorizations");
     }
@@ -201,7 +203,7 @@ public class ApiClient {
     return okBuilder;
   }
 
-  public void addAuthsToOkBuilder(OkHttpClient.Builder okBuilder) {
+  private void addAuthsToOkBuilder(OkHttpClient.Builder okBuilder) {
     for(Interceptor apiAuthorization : apiAuthorizations.values()) {
       okBuilder.addInterceptor(apiAuthorization);
     }
@@ -247,7 +249,7 @@ class GsonCustomConverterFactory extends Converter.Factory
   private final Gson gson;
   private final GsonConverterFactory gsonConverterFactory;
 
-  public static GsonCustomConverterFactory create(Gson gson) {
+  static GsonCustomConverterFactory create(Gson gson) {
     return new GsonCustomConverterFactory(gson);
   }
 

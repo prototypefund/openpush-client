@@ -3,9 +3,13 @@ package eu.bubu1.logintest.api;
 import java.util.List;
 
 import eu.bubu1.logintest.apimodels.User;
-import io.reactivex.Completable;
-import io.reactivex.Observable;
-import retrofit2.http.*;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UserApi {
   /**
@@ -13,59 +17,59 @@ public interface UserApi {
    * 
    * @param id The id of the user to update (required)
    * @param user Updated user details. (required)
-   * @return Observable&lt;User&gt;
+   * @return Call&lt;User&gt;
    */
   @Headers({
     "Content-Type:application/json"
   })
   @POST("user/{id}")
-  Observable<User> apiUserUpdate(
-          @retrofit2.http.Path("id") String id, @retrofit2.http.Body User user
+  Call<User> apiUserUpdate(
+          @Path("id") String id, @Body User user
   );
 
   /**
    * Return all users.
    *
-   * @return Observable&lt;List&lt;User&gt;&gt;
+   * @return Call&lt;List&lt;User&gt;&gt;
    */
   @GET("user")
-  Observable<List<User>> userGet();
+  Call<List<User>> userGet();
 
 
   /**
    * Delete a user.
    *
    * @param id The id of the user to delete. (required)
-   * @return Completable
+   * @return Call&lt;Void&gt;
    */
   @DELETE("user/{id}")
-  Completable userIdDelete(
-          @retrofit2.http.Path("id") String id
+  Call<Void> userIdDelete(
+          @Path("id") String id
   );
 
   /**
    * Get a user.
    *
    * @param id The id of the user to retrieve (required)
-   * @return Observable&lt;User&gt;
+   * @return Call&lt;User&gt;
    */
   @GET("user/{id}")
-  Observable<User> userIdGet(
-          @retrofit2.http.Path("id") String id
+  Call<User> userIdGet(
+          @Path("id") String id
   );
 
   /**
    * Add a user.
    *
    * @param user the user to add (required)
-   * @return Observable&lt;User&gt;
+   * @return Call&lt;User&gt;
    */
   @Headers({
     "Content-Type:application/json"
   })
   @POST("user")
-  Observable<User> userPost(
-          @retrofit2.http.Body User user
+  Call<User> userPost(
+          @Body User user
   );
 
 }

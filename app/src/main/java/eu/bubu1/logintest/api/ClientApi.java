@@ -4,29 +4,43 @@ import java.util.List;
 
 import eu.bubu1.logintest.apimodels.Client;
 import eu.bubu1.logintest.apimodels.ClientRegistration;
-import io.reactivex.Completable;
-import io.reactivex.Observable;
-import retrofit2.http.*;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ClientApi {
   /**
+   * Delete current client.
+   * 
+   * @return Call&lt;Void&gt;
+   */
+  @DELETE("client")
+  Call<Void> apiClientDeleteSelf();
+    
+
+  /**
    * Return all clients.
    * 
-   * @return Observable&lt;List&lt;Client&gt;&gt;
+   * @return Call&lt;List&lt;Client&gt;&gt;
    */
   @GET("client")
-  Observable<List<Client>> clientGet();
+  Call<List<Client>> clientGet();
     
 
   /**
    * Delete a client.
    * 
    * @param id The id of the client to delete (required)
-   * @return Completable
+   * @return Call&lt;Void&gt;
    */
   @DELETE("client/{id}")
-  Completable clientIdDelete(
-          @retrofit2.http.Path("id") String id
+  Call<Void> clientIdDelete(
+          @Path("id") String id
   );
 
   /**
@@ -34,28 +48,28 @@ public interface ClientApi {
    *
    * @param id The id of the client to update (required)
    * @param client Updated client details. (required)
-   * @return Observable&lt;Client&gt;
+   * @return Call&lt;Client&gt;
    */
   @Headers({
     "Content-Type:application/json"
   })
   @PUT("client/{id}")
-  Observable<Client> clientIdPut(
-          @retrofit2.http.Path("id") String id, @retrofit2.http.Body Client client
+  Call<Client> clientIdPut(
+          @Path("id") String id, @Body Client client
   );
 
   /**
    * Create a new client.
    *
    * @param clientRegistration Client to add (required)
-   * @return Observable&lt;Client&gt;
+   * @return Call&lt;Client&gt;
    */
   @Headers({
     "Content-Type:application/json"
   })
   @POST("client")
-  Observable<Client> clientPost(
-          @retrofit2.http.Body ClientRegistration clientRegistration
+  Call<Client> clientPost(
+          @Body ClientRegistration clientRegistration
   );
 
 }

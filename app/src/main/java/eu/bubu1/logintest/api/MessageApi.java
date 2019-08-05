@@ -1,31 +1,34 @@
 package eu.bubu1.logintest.api;
 
 import eu.bubu1.logintest.apimodels.Message;
-import io.reactivex.Completable;
-import retrofit2.http.*;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 
 public interface MessageApi {
   /**
    * Subscribe to messages delivered via SSE (Server Sent Events) here
    * 
-   * @return Completable
+   * @return Call&lt;Void&gt;
    */
   @GET("subscribe")
-  Completable apiMessageSubscribe();
+  Call<Void> apiMessageSubscribe();
     
 
   /**
    * Post a message.
    * 
    * @param message Message to post. (required)
-   * @return Completable
+   * @return Call&lt;Void&gt;
    */
   @Headers({
     "Content-Type:application/json"
   })
   @POST("message")
-  Completable messagePost(
-          @retrofit2.http.Body Message message
+  Call<Void> messagePost(
+          @Body Message message
   );
 
 }
