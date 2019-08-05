@@ -11,5 +11,7 @@
     <string name="need_http_https">Address needs http:// or https://</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must not empty</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="authentication_failure">"Authorization failed."</string>
+    <string name="logout_failed">"Deleting remote token failed"</string>
+    <string name="internal_server_error">Internal Server Error.</string>
 </resources>

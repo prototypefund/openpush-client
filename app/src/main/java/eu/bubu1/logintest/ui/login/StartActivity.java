@@ -56,12 +56,14 @@ public class StartActivity extends AppCompatActivity {
                         .enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                //ignore
+                                if(!response.isSuccessful()){
+                                    Toast.makeText(StartActivity.this, R.string.logout_failed, Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<Void> call, Throwable t) {
-                                Toast.makeText(StartActivity.this,"Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StartActivity.this, R.string.logout_failed, Toast.LENGTH_SHORT).show();
                             }
                         });
             SaveSharedPreference.setLoggedOut(getApplicationContext());

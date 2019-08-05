@@ -3,6 +3,7 @@ package eu.bubu1.logintest.data;
 import android.os.Build;
 import android.webkit.URLUtil;
 
+import eu.bubu1.logintest.R;
 import eu.bubu1.logintest.RegisterNewDeviceService;
 import eu.bubu1.logintest.data.model.RegisteredClient;
 import eu.bubu1.logintest.apimodels.Client;
@@ -26,9 +27,9 @@ public class LoginDataSource {
                 else {
                     switch (clientResponse.code()) {
                         case 401:
-                            return new Result.Error(new IOException("Authorization failed."));
+                            return new Result.Error(new IOException(String.valueOf(R.string.authentication_failure)));
                         case 500:
-                            return new Result.Error(new IOException("Internal Server Error."));
+                            return new Result.Error(new IOException(String.valueOf(R.string.internal_server_error)));
                         default:
                             return new Result.Error(new IOException("Something unexpected went wrong, Error code: " + clientResponse.code()));
                     }
