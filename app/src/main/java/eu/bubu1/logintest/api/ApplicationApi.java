@@ -2,6 +2,7 @@ package eu.bubu1.logintest.api;
 
 import java.util.List;
 
+import eu.bubu1.logintest.apimodels.AppRegistration;
 import eu.bubu1.logintest.apimodels.Application;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -35,7 +36,7 @@ public interface ApplicationApi {
   /**
    * Register a new application.
    *
-   * @param application Application to add (required)
+   * @param appRegistration Application to add (required)
    * @return Call&lt;Application&gt;
    */
   @Headers({
@@ -43,7 +44,7 @@ public interface ApplicationApi {
   })
   @POST("application")
   Call<Application> applicationPost(
-          @Body Application application
+          @Body AppRegistration appRegistration
   );
 
 }
