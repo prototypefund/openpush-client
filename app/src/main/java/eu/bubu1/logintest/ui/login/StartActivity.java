@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import eu.bubu1.logintest.MessageSubscriptionService;
 import eu.bubu1.logintest.R;
 import eu.bubu1.logintest.UnregisterService;
 import eu.bubu1.logintest.utils.SaveSharedPreference;
@@ -25,7 +27,7 @@ import static java.lang.String.valueOf;
 
 public class StartActivity extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
+    Button btnStartService, btnStopService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,22 @@ public class StartActivity extends AppCompatActivity {
         final TextView usernameTextView = findViewById(R.id.username);
         final TextView clientTokenTextView = findViewById(R.id.clientToken);
         final Button logoutButton = findViewById(R.id.logout);
+
+        btnStartService = findViewById(R.id.buttonStartService);
+        btnStopService = findViewById(R.id.buttonStopService);
+        btnStartService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService();
+            }
+        });
+
+        btnStopService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopService();
+            }
+        });
 
         if (!SaveSharedPreference.getLoggedInStatus(getApplicationContext())) {
             logoutButton.setEnabled(false);
@@ -69,5 +87,17 @@ public class StartActivity extends AppCompatActivity {
             SaveSharedPreference.setLoggedOut(getApplicationContext());
             recreate();
         });
+    }
+
+    public void startService() {
+        Intent serviceIntent = new Intent(this, MessageSubscriptionService.class);
+        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
+
+    public void stopService() {
+        Intent serviceIntent = new Intent(this, MessageSubscriptionService.class);
+        stopService(serviceIntent);
     }
 }
