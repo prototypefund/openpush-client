@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginTest</string>
+    <string name="app_name">PushClient</string>
     <!-- Strings related to login -->
     <string name="prompt_server">Server Address</string>
     <string name="prompt_username">Username</string>
@@ -7,11 +7,10 @@
     <string name="action_sign_in">Login</string>
     <string name="action_sign_out">Logout</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
     <string name="need_http_https">Address needs http:// or https://</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must not empty</string>
-    <string name="authentication_failure">"Authorization failed."</string>
-    <string name="logout_failed">"Deleting remote token failed"</string>
+    <string name="authentication_failure">Authorization failed.</string>
+    <string name="logout_failed">Deleting remote token failed</string>
     <string name="internal_server_error">Internal Server Error.</string>
 </resources>

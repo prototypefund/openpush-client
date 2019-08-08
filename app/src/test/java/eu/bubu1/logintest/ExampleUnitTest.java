@@ -1,4 +1,4 @@
-package eu.bubu1.logintest;
+package eu.bubu1.pushclient;
 
 import org.junit.Test;
 
