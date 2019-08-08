@@ -122,12 +122,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                new Thread(() -> {
-                loginViewModel.login(
+                new Thread(() -> loginViewModel.login(
                         servernameEditText.getText().toString(),
                         usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-                }).start();
+                        passwordEditText.getText().toString())).start();
             }
         });
     }
