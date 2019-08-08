@@ -18,27 +18,28 @@ public class LoginDataSource {
 
     public Result<RegisteredClient> login(String serverUri, String username, String password) {
         try {
-                Response<Client> clientResponse = new RegisterNewDeviceService(serverUri, username, password)
-                        .registerNewDevice(Build.MODEL);
-                if (clientResponse.isSuccessful()){
-                    RegisteredClient client = new RegisteredClient(username, serverUri, clientResponse.body().getToken());
-                    return new Result.Success<>(client);
+            Response<Client> clientResponse = new RegisterNewDeviceService(serverUri, username, password)
+                    .registerNewDevice(Build.MODEL);
+            if (clientResponse.isSuccessful()) {
+                RegisteredClient client = new RegisteredClient(username, serverUri, clientResponse.body().getToken());
+                return new Result.Success<>(client);
+            } else {
+                switch (clientResponse.code()) {
+                    //Todo use ressources, somehow (we can't put ints into an expection. Do we even need exceptions?)
+                    case 401:
+                        return new Result.Error(new IOException("Authorization failed."));
+                    case 500:
+                        return new Result.Error(new IOException("Deleting remote token failed"));
+                    default:
+                        return new Result.Error(new IOException("Something unexpected went wrong, Error code: " + clientResponse.code()));
                 }
-                else {
-                    switch (clientResponse.code()) {
-                        //Todo use ressources, somehow (we can't put ints into an expection. Do we even need exceptions?)
-                        case 401:
-                            return new Result.Error(new IOException("Authorization failed."));
-                        case 500:
-                            return new Result.Error(new IOException("Deleting remote token failed"));
-                        default:
-                            return new Result.Error(new IOException("Something unexpected went wrong, Error code: " + clientResponse.code()));
-                    }
-                }
-
-
-            } catch (IOException e) {
-                return new Result.Error(new IOException("Network Error", e));
             }
+
+
+        } catch (IOException e) {
+            return new Result.Error(new IOException("Network Error", e));
+        } catch (IllegalArgumentException e) {
+            return new Result.Error(new IllegalArgumentException(e.getMessage()));
+        }
     }
 }
