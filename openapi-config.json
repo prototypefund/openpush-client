@@ -1,0 +1,8 @@
+{
+  "library": "retrofit2",
+  "modelPackage": "eu.bubu1.pushclient.apimodels",
+  "apiPackage": "eu.bubu1.pushclient.api",
+  "invokerPackage": "eu.bubu1.pushclient",
+  "java8": "true",
+  "dateLibrary": "threetenbp"
+}

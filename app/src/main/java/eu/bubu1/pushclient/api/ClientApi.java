@@ -1,17 +1,21 @@
 package eu.bubu1.pushclient.api;
 
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.*;
+
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import okhttp3.MultipartBody;
 
 import eu.bubu1.pushclient.apimodels.Client;
 import eu.bubu1.pushclient.apimodels.ClientRegistration;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
+import eu.bubu1.pushclient.apimodels.Error;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface ClientApi {
   /**
@@ -40,12 +44,12 @@ public interface ClientApi {
    */
   @DELETE("client/{id}")
   Call<Void> clientIdDelete(
-          @Path("id") String id
+    @retrofit2.http.Path("id") String id
   );
 
   /**
    * Update a client.
-   *
+   * 
    * @param id The id of the client to update (required)
    * @param client Updated client details. (required)
    * @return Call&lt;Client&gt;
@@ -55,12 +59,12 @@ public interface ClientApi {
   })
   @PUT("client/{id}")
   Call<Client> clientIdPut(
-          @Path("id") String id, @Body Client client
+    @retrofit2.http.Path("id") String id, @retrofit2.http.Body Client client
   );
 
   /**
    * Create a new client.
-   *
+   * 
    * @param clientRegistration Client to add (required)
    * @return Call&lt;Client&gt;
    */
@@ -69,7 +73,7 @@ public interface ClientApi {
   })
   @POST("client")
   Call<Client> clientPost(
-          @Body ClientRegistration clientRegistration
+    @retrofit2.http.Body ClientRegistration clientRegistration
   );
 
 }

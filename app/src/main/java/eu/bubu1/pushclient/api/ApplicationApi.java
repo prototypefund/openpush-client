@@ -1,16 +1,21 @@
 package eu.bubu1.pushclient.api;
 
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.*;
+
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import okhttp3.MultipartBody;
 
 import eu.bubu1.pushclient.apimodels.AppRegistration;
 import eu.bubu1.pushclient.apimodels.Application;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
+import eu.bubu1.pushclient.apimodels.Error;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface ApplicationApi {
   /**
@@ -30,12 +35,12 @@ public interface ApplicationApi {
    */
   @DELETE("application/{id}")
   Call<Void> applicationIdDelete(
-          @Path("id") String id
+    @retrofit2.http.Path("id") String id
   );
 
   /**
    * Register a new application.
-   *
+   * 
    * @param appRegistration Application to add (required)
    * @return Call&lt;Application&gt;
    */
@@ -44,7 +49,7 @@ public interface ApplicationApi {
   })
   @POST("application")
   Call<Application> applicationPost(
-          @Body AppRegistration appRegistration
+    @retrofit2.http.Body AppRegistration appRegistration
   );
 
 }
