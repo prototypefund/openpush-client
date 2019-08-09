@@ -24,45 +24,32 @@ import io.swagger.annotations.ApiModelProperty;
  * A registered application installed on a client
  */
 @ApiModel(description = "A registered application installed on a client")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-08T12:22:13.072+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T15:35:25.389+02:00[Europe/Berlin]")
 public class Application {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
-  private Long id;
-
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String SERIALIZED_NAME_REGISTRATION_ID = "registration_id";
+  @SerializedName(SERIALIZED_NAME_REGISTRATION_ID)
+  private String registrationId;
 
   public static final String SERIALIZED_NAME_ROUTING_TOKEN = "routing_token";
   @SerializedName(SERIALIZED_NAME_ROUTING_TOKEN)
   private String routingToken;
 
-   /**
-   * Get id
-   * @return id
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public Long getId() {
-    return id;
-  }
-
-  public Application name(String name) {
-    this.name = name;
+  public Application registrationId(String registrationId) {
+    this.registrationId = registrationId;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get registrationId
+   * @return registrationId
   **/
-  @ApiModelProperty(example = "riot-android", required = true, value = "")
-  public String getName() {
-    return name;
+  @ApiModelProperty(example = "XXAAj76gkjlsfdhalSKL", required = true, value = "")
+  public String getRegistrationId() {
+    return registrationId;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setRegistrationId(String registrationId) {
+    this.registrationId = registrationId;
   }
 
    /**
@@ -84,14 +71,13 @@ public class Application {
       return false;
     }
     Application application = (Application) o;
-    return Objects.equals(this.id, application.id) &&
-        Objects.equals(this.name, application.name) &&
+    return Objects.equals(this.registrationId, application.registrationId) &&
         Objects.equals(this.routingToken, application.routingToken);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, routingToken);
+    return Objects.hash(registrationId, routingToken);
   }
 
 
@@ -99,8 +85,7 @@ public class Application {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Application {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    registrationId: ").append(toIndentedString(registrationId)).append("\n");
     sb.append("    routingToken: ").append(toIndentedString(routingToken)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -15,10 +15,10 @@ public class RegisterAppService {
         defaultClient.setApiKey(clientKey);
     }
 
-    public Response<Application> registerNewDevice(String name) throws IOException {
+    public Response<Application> registerNewDevice(String registrationId) throws IOException {
         ApplicationApi api = defaultClient.createService(ApplicationApi.class);
         AppRegistration app = new AppRegistration();
-        app.name(name);
+        app.registrationId(registrationId);
         return api.applicationPost(app).execute();
     }
 

@@ -24,28 +24,28 @@ import io.swagger.annotations.ApiModelProperty;
  * Data for registering a new App
  */
 @ApiModel(description = "Data for registering a new App")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-08T12:22:13.072+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T15:35:25.389+02:00[Europe/Berlin]")
 public class AppRegistration {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String SERIALIZED_NAME_REGISTRATION_ID = "registration_id";
+  @SerializedName(SERIALIZED_NAME_REGISTRATION_ID)
+  private String registrationId;
 
-  public AppRegistration name(String name) {
-    this.name = name;
+  public AppRegistration registrationId(String registrationId) {
+    this.registrationId = registrationId;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Token with which the pushclient can identify the target application, so it doesn&#39;t have to store routing token.
+   * @return registrationId
   **/
-  @ApiModelProperty(example = "riot-android", required = true, value = "")
-  public String getName() {
-    return name;
+  @ApiModelProperty(example = "XXAAj76gkjlsfdhalSKL", required = true, value = "Token with which the pushclient can identify the target application, so it doesn't have to store routing token.")
+  public String getRegistrationId() {
+    return registrationId;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setRegistrationId(String registrationId) {
+    this.registrationId = registrationId;
   }
 
 
@@ -58,12 +58,12 @@ public class AppRegistration {
       return false;
     }
     AppRegistration appRegistration = (AppRegistration) o;
-    return Objects.equals(this.name, appRegistration.name);
+    return Objects.equals(this.registrationId, appRegistration.registrationId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(registrationId);
   }
 
 
@@ -71,7 +71,7 @@ public class AppRegistration {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class AppRegistration {\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    registrationId: ").append(toIndentedString(registrationId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
