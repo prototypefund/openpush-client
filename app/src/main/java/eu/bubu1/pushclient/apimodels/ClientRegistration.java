@@ -28,13 +28,15 @@ import java.io.IOException;
  * Data for registering a new client
  */
 @ApiModel(description = "Data for registering a new client")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T16:28:48.124+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-15T16:29:20.535+01:00[Europe/Berlin]")
 public class ClientRegistration {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+
   public ClientRegistration name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -44,9 +46,11 @@ public class ClientRegistration {
    * @return name
   **/
   @ApiModelProperty(example = "Phone 1", required = true, value = "")
+
   public String getName() {
     return name;
   }
+
 
   public void setName(String name) {
     this.name = name;

@@ -31,7 +31,7 @@ import java.util.List;
  * A mobile client
  */
 @ApiModel(description = "A mobile client")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T16:28:48.124+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-15T16:29:20.535+01:00[Europe/Berlin]")
 public class Client {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -49,16 +49,22 @@ public class Client {
   @SerializedName(SERIALIZED_NAME_APPLICATIONS)
   private List<Application> applications = new ArrayList<>();
 
+
    /**
    * Get id
    * @return id
   **/
   @ApiModelProperty(required = true, value = "")
+
   public Long getId() {
     return id;
   }
 
+
+
+
   public Client name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -68,31 +74,41 @@ public class Client {
    * @return name
   **/
   @ApiModelProperty(example = "Phone 1", required = true, value = "")
+
   public String getName() {
     return name;
   }
 
+
   public void setName(String name) {
     this.name = name;
   }
+
 
    /**
    * Get token
    * @return token
   **/
   @ApiModelProperty(example = "WDKZMxUFpdjlgiFVSx2A2rP5GSM", required = true, value = "")
+
   public String getToken() {
     return token;
   }
+
+
+
 
    /**
    * Get applications
    * @return applications
   **/
   @ApiModelProperty(required = true, value = "")
+
   public List<Application> getApplications() {
     return applications;
   }
+
+
 
 
   @Override

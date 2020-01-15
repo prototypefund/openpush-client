@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T16:28:48.124+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-15T16:29:20.535+01:00[Europe/Berlin]")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -48,16 +48,22 @@ public class User {
   @SerializedName(SERIALIZED_NAME_CLIENTS)
   private List<Client> clients = new ArrayList<>();
 
+
    /**
    * Get id
    * @return id
   **/
   @ApiModelProperty(example = "783", required = true, value = "")
+
   public Long getId() {
     return id;
   }
 
+
+
+
   public User name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -67,15 +73,19 @@ public class User {
    * @return name
   **/
   @ApiModelProperty(example = "User1", required = true, value = "")
+
   public String getName() {
     return name;
   }
+
 
   public void setName(String name) {
     this.name = name;
   }
 
+
   public User password(Object password) {
+    
     this.password = password;
     return this;
   }
@@ -85,22 +95,28 @@ public class User {
    * @return password
   **/
   @ApiModelProperty(example = "SuperPassword123", required = true, value = "")
+
   public Object getPassword() {
     return password;
   }
 
+
   public void setPassword(Object password) {
     this.password = password;
   }
+
 
    /**
    * Get clients
    * @return clients
   **/
   @ApiModelProperty(required = true, value = "")
+
   public List<Client> getClients() {
     return clients;
   }
+
+
 
 
   @Override

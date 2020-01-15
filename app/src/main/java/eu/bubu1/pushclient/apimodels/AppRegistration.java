@@ -28,13 +28,15 @@ import java.io.IOException;
  * Data for registering a new App
  */
 @ApiModel(description = "Data for registering a new App")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T16:28:48.124+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-15T16:29:20.535+01:00[Europe/Berlin]")
 public class AppRegistration {
   public static final String SERIALIZED_NAME_REGISTRATION_ID = "registration_id";
   @SerializedName(SERIALIZED_NAME_REGISTRATION_ID)
   private String registrationId;
 
+
   public AppRegistration registrationId(String registrationId) {
+    
     this.registrationId = registrationId;
     return this;
   }
@@ -44,9 +46,11 @@ public class AppRegistration {
    * @return registrationId
   **/
   @ApiModelProperty(example = "XXAAj76gkjlsfdhalSKL", required = true, value = "Token with which the pushclient can identify the target application, so it doesn't have to store routing token.")
+
   public String getRegistrationId() {
     return registrationId;
   }
+
 
   public void setRegistrationId(String registrationId) {
     this.registrationId = registrationId;

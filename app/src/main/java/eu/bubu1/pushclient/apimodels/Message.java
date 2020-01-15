@@ -23,28 +23,31 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Message
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T16:28:48.124+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-15T16:29:20.535+01:00[Europe/Berlin]")
 public class Message {
-  public static final String SERIALIZED_NAME_SUBJECT = "subject";
-  @SerializedName(SERIALIZED_NAME_SUBJECT)
-  private String subject;
+  public static final String SERIALIZED_NAME_TOKEN = "token";
+  @SerializedName(SERIALIZED_NAME_TOKEN)
+  private String token;
 
-  public static final String SERIALIZED_NAME_BODY = "body";
-  @SerializedName(SERIALIZED_NAME_BODY)
-  private String body;
+  public static final String SERIALIZED_NAME_DATA = "data";
+  @SerializedName(SERIALIZED_NAME_DATA)
+  private Map<String, Object> data = new HashMap<>();
 
   /**
-   * Gets or Sets priority
+   * (currently unused)
    */
   @JsonAdapter(PriorityEnum.Adapter.class)
   public enum PriorityEnum {
-    NORMAL("NORMAL"),
+    NORMAL("normal"),
     
-    HIGH("HIGH");
+    HIGH("high");
 
     private String value;
 
@@ -78,7 +81,7 @@ public class Message {
 
       @Override
       public PriorityEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
+        String value =  jsonReader.nextString();
         return PriorityEnum.fromValue(value);
       }
     }
@@ -88,58 +91,130 @@ public class Message {
   @SerializedName(SERIALIZED_NAME_PRIORITY)
   private PriorityEnum priority;
 
-  public Message subject(String subject) {
-    this.subject = subject;
+  public static final String SERIALIZED_NAME_TIME_TO_LIVE = "time_to_live";
+  @SerializedName(SERIALIZED_NAME_TIME_TO_LIVE)
+  private Integer timeToLive;
+
+  public static final String SERIALIZED_NAME_COLLAPSE_KEY = "collapse_key";
+  @SerializedName(SERIALIZED_NAME_COLLAPSE_KEY)
+  private String collapseKey;
+
+
+  public Message token(String token) {
+    
+    this.token = token;
     return this;
   }
 
    /**
-   * Get subject
-   * @return subject
+   * Token to target a mobile application.
+   * @return token
   **/
-  @ApiModelProperty(example = "Message Subject", value = "")
-  public String getSubject() {
-    return subject;
+  @ApiModelProperty(example = "8904j76gkjlsfdhalSKL", required = true, value = "Token to target a mobile application.")
+
+  public String getToken() {
+    return token;
   }
 
-  public void setSubject(String subject) {
-    this.subject = subject;
+
+  public void setToken(String token) {
+    this.token = token;
   }
 
-  public Message body(String body) {
-    this.body = body;
+
+  public Message data(Map<String, Object> data) {
+    
+    this.data = data;
+    return this;
+  }
+
+  public Message putDataItem(String key, Object dataItem) {
+    this.data.put(key, dataItem);
     return this;
   }
 
    /**
-   * Get body
-   * @return body
+   * Key value pairs to be delivered to the targeted application.
+   * @return data
   **/
-  @ApiModelProperty(example = "Long message text goes here...", required = true, value = "")
-  public String getBody() {
-    return body;
+  @ApiModelProperty(example = "{\"title\":\"New Message\",\"body\":\"You got a new message!\",\"foo\":\"bar\"}", required = true, value = "Key value pairs to be delivered to the targeted application.")
+
+  public Map<String, Object> getData() {
+    return data;
   }
 
-  public void setBody(String body) {
-    this.body = body;
+
+  public void setData(Map<String, Object> data) {
+    this.data = data;
   }
+
 
   public Message priority(PriorityEnum priority) {
+    
     this.priority = priority;
     return this;
   }
 
    /**
-   * Get priority
+   * (currently unused)
    * @return priority
   **/
-  @ApiModelProperty(value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "(currently unused)")
+
   public PriorityEnum getPriority() {
     return priority;
   }
 
+
   public void setPriority(PriorityEnum priority) {
     this.priority = priority;
+  }
+
+
+  public Message timeToLive(Integer timeToLive) {
+    
+    this.timeToLive = timeToLive;
+    return this;
+  }
+
+   /**
+   * (currently unused) How long to store the message (in seconds) for offline devices
+   * @return timeToLive
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2419200", value = "(currently unused) How long to store the message (in seconds) for offline devices")
+
+  public Integer getTimeToLive() {
+    return timeToLive;
+  }
+
+
+  public void setTimeToLive(Integer timeToLive) {
+    this.timeToLive = timeToLive;
+  }
+
+
+  public Message collapseKey(String collapseKey) {
+    
+    this.collapseKey = collapseKey;
+    return this;
+  }
+
+   /**
+   * (currently unused) Store only one message per collapse_key, set to something different to store multiple messages
+   * @return collapseKey
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "(currently unused) Store only one message per collapse_key, set to something different to store multiple messages")
+
+  public String getCollapseKey() {
+    return collapseKey;
+  }
+
+
+  public void setCollapseKey(String collapseKey) {
+    this.collapseKey = collapseKey;
   }
 
 
@@ -152,14 +227,16 @@ public class Message {
       return false;
     }
     Message message = (Message) o;
-    return Objects.equals(this.subject, message.subject) &&
-        Objects.equals(this.body, message.body) &&
-        Objects.equals(this.priority, message.priority);
+    return Objects.equals(this.token, message.token) &&
+        Objects.equals(this.data, message.data) &&
+        Objects.equals(this.priority, message.priority) &&
+        Objects.equals(this.timeToLive, message.timeToLive) &&
+        Objects.equals(this.collapseKey, message.collapseKey);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(subject, body, priority);
+    return Objects.hash(token, data, priority, timeToLive, collapseKey);
   }
 
 
@@ -167,9 +244,11 @@ public class Message {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Message {\n");
-    sb.append("    subject: ").append(toIndentedString(subject)).append("\n");
-    sb.append("    body: ").append(toIndentedString(body)).append("\n");
+    sb.append("    token: ").append(toIndentedString(token)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
+    sb.append("    timeToLive: ").append(toIndentedString(timeToLive)).append("\n");
+    sb.append("    collapseKey: ").append(toIndentedString(collapseKey)).append("\n");
     sb.append("}");
     return sb.toString();
   }

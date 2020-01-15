@@ -27,50 +27,110 @@ import java.io.IOException;
 /**
  * Error
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2019-08-09T16:28:48.124+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-15T16:29:20.535+01:00[Europe/Berlin]")
 public class Error {
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
-  private Integer code;
+  public static final String SERIALIZED_NAME_STATUS = "status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private Integer status;
 
-  public static final String SERIALIZED_NAME_MESSAGE = "message";
-  @SerializedName(SERIALIZED_NAME_MESSAGE)
-  private String message;
+  public static final String SERIALIZED_NAME_DETAIL = "detail";
+  @SerializedName(SERIALIZED_NAME_DETAIL)
+  private String detail;
 
-  public Error code(Integer code) {
-    this.code = code;
+  public static final String SERIALIZED_NAME_TITLE = "title";
+  @SerializedName(SERIALIZED_NAME_TITLE)
+  private String title;
+
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
+  private String type;
+
+
+  public Error status(Integer status) {
+    
+    this.status = status;
     return this;
   }
 
    /**
-   * Get code
-   * @return code
+   * Get status
+   * @return status
   **/
   @ApiModelProperty(required = true, value = "")
-  public Integer getCode() {
-    return code;
+
+  public Integer getStatus() {
+    return status;
   }
 
-  public void setCode(Integer code) {
-    this.code = code;
+
+  public void setStatus(Integer status) {
+    this.status = status;
   }
 
-  public Error message(String message) {
-    this.message = message;
+
+  public Error detail(String detail) {
+    
+    this.detail = detail;
     return this;
   }
 
    /**
-   * Get message
-   * @return message
+   * Get detail
+   * @return detail
   **/
   @ApiModelProperty(required = true, value = "")
-  public String getMessage() {
-    return message;
+
+  public String getDetail() {
+    return detail;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+
+  public void setDetail(String detail) {
+    this.detail = detail;
+  }
+
+
+  public Error title(String title) {
+    
+    this.title = title;
+    return this;
+  }
+
+   /**
+   * Get title
+   * @return title
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public String getTitle() {
+    return title;
+  }
+
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+
+  public Error type(String type) {
+    
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * Get type
+   * @return type
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public String getType() {
+    return type;
+  }
+
+
+  public void setType(String type) {
+    this.type = type;
   }
 
 
@@ -83,13 +143,15 @@ public class Error {
       return false;
     }
     Error error = (Error) o;
-    return Objects.equals(this.code, error.code) &&
-        Objects.equals(this.message, error.message);
+    return Objects.equals(this.status, error.status) &&
+        Objects.equals(this.detail, error.detail) &&
+        Objects.equals(this.title, error.title) &&
+        Objects.equals(this.type, error.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, message);
+    return Objects.hash(status, detail, title, type);
   }
 
 
@@ -97,8 +159,10 @@ public class Error {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Error {\n");
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    detail: ").append(toIndentedString(detail)).append("\n");
+    sb.append("    title: ").append(toIndentedString(title)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }
