@@ -2,9 +2,9 @@ package eu.bubu1.pushclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
