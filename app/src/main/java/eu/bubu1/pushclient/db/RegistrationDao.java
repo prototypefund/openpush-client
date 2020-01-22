@@ -1,5 +1,6 @@
 package eu.bubu1.pushclient.db;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,7 +16,7 @@ import eu.bubu1.pushclient.db.entity.Registration;
 public interface RegistrationDao {
 
     @Query("SELECT * FROM registration")
-    List<Registration> getAll();
+    LiveData<List<Registration>> getAll();
 
     @Query("SELECT * FROM registration WHERE registrationId LIKE :registrationId LIMIT 1")
     Registration findByRegistrationId(String registrationId);
@@ -25,6 +26,9 @@ public interface RegistrationDao {
 
     @Insert
     void insertAll(List<Registration> registrations);
+
+    @Insert
+    void insert(Registration registration);
 
     @Update
     void update(Registration registration);
