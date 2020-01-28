@@ -6,20 +6,18 @@ import eu.bubu1.pushclient.api.ApplicationApi;
 import eu.bubu1.pushclient.apimodels.AppRegistration;
 import eu.bubu1.pushclient.apimodels.Application;
 import retrofit2.Call;
+import retrofit2.Response;
 
-public class RegisterAppService {
+public class UnregisterAppService {
     private ApiClient defaultClient;
 
-    public RegisterAppService(String uri, String clientKey){
+    public UnregisterAppService(String uri, String clientKey){
         defaultClient = new ApiClient(uri, "client_key");
         defaultClient.setApiKey(clientKey);
     }
 
-    public Call<Application> registerApp(String registrationId){
+    public Call<Void> unregisterApp(String registrationId){
         ApplicationApi api = defaultClient.createService(ApplicationApi.class);
-        AppRegistration app = new AppRegistration();
-        app.registrationId(registrationId);
-        return api.applicationPost(app);
+        return api.applicationIdDelete(registrationId);
     }
-
 }

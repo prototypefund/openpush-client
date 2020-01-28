@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import eu.bubu1.pushclient.db.Database;
 import eu.bubu1.pushclient.db.PushClientDatabase;
 import eu.bubu1.pushclient.db.RegistrationDao;
 import eu.bubu1.pushclient.db.entity.Registration;

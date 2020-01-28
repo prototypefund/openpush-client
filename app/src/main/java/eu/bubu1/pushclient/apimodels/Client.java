@@ -31,7 +31,7 @@ import java.util.List;
  * A mobile client
  */
 @ApiModel(description = "A mobile client")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-15T16:29:20.535+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-23T17:14:54.483+01:00[Europe/Berlin]")
 public class Client {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

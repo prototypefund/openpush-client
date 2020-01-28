@@ -35,4 +35,7 @@ public interface RegistrationDao {
 
     @Delete
     void delete(Registration registration);
+
+    @Query("DELETE FROM registration WHERE packageName LIKE :packageName")
+    void delete(String packageName);
 }
